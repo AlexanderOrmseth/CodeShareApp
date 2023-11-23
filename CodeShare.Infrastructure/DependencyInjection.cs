@@ -13,12 +13,9 @@ public static class DependencyInjection
         IConfiguration configuration
     )
     {
-        Console.WriteLine(configuration.GetConnectionString("DefaultConnection"));
-
         services.AddDbContext<DatabaseContext>(
             options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
         );
-
         return services;
     }
 
