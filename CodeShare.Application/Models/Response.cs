@@ -54,9 +54,9 @@ public class Response<T>
                 char.ToLowerInvariant(failure.PropertyName[0]) + failure.PropertyName[1..];
             var errorMessage = failure.ErrorMessage;
 
-            if (formattedErrors.ContainsKey(fieldName))
+            if (formattedErrors.TryGetValue(fieldName, out string[]? value))
             {
-                var existingErrors = formattedErrors[fieldName].ToList();
+                var existingErrors = value.ToList();
                 existingErrors.Add(errorMessage);
                 formattedErrors[fieldName] = existingErrors.ToArray();
             }

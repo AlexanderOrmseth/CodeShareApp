@@ -7,21 +7,15 @@ using CodeShare.Infrastructure;
 const string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.ConfigureCors(myAllowSpecificOrigins, builder.Environment);
 builder.Services.AddInfrastructureServices(builder.Configuration).AddRepositories();
 builder.Services.AddSwaggerGenWithOptions();
 builder.Services.AddApplicationServices();
-builder.Services.ConfigureCors(myAllowSpecificOrigins);
 
 var app = builder.Build();
-
 app.UseMiddleware<ExceptionMiddleware>();
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
+app.UseDevelopmentSettings(app.Environment);
 app.UseCors(myAllowSpecificOrigins);
+app.UseHttpsRedirection();
 app.RegisterCodeSnippetEndpoints();
 app.Run();

@@ -32,7 +32,8 @@ public class GetCodeSnippetByIdHandler(ICodeSnippetRepository repository, IHtmlG
             Author = codeSnippet.Author,
             CreatedAt = codeSnippet.CreatedAt,
             Title = codeSnippet.Title,
-            Code = generatedHtml.Html,
+            Code = codeSnippet.Code,
+            Html = generatedHtml.Html,
             LinesOfCode = generatedHtml.LinesOfCode,
         };
 

@@ -5,22 +5,56 @@ namespace CodeShare.Api;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection ConfigureCors(this IServiceCollection services, string name)
+    public static IServiceCollection ConfigureCors(
+        this IServiceCollection services,
+        string name,
+        IWebHostEnvironment environment
+    )
     {
         services.AddCors(options =>
         {
             options.AddPolicy(
                 name: name,
                 builder =>
-                    builder
-                        .WithOrigins("http://localhost:3000")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowCredentials()
+                {
+                    if (environment.IsDevelopment())
+                    {
+                        builder.AllowAnyOrigin().AllowAnyHeader().WithMethods("GET", "POST");
+                    }
+                    else
+                    {
+                        builder
+                            .WithOrigins("TODO: REPLACE THIS")
+                            .AllowAnyHeader()
+                            .WithMethods("GET", "POST");
+                    }
+                }
             );
         });
 
         return services;
+    }
+
+    public static IApplicationBuilder UseDevelopmentSettings(
+        this IApplicationBuilder app,
+        IWebHostEnvironment environment
+    )
+    {
+        if (environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            app.Use(
+                async (_, next) =>
+                {
+                    await Task.Delay(200);
+                    await next.Invoke();
+                }
+            );
+        }
+
+        return app;
     }
 
     public static IServiceCollection AddSwaggerGenWithOptions(this IServiceCollection services)
