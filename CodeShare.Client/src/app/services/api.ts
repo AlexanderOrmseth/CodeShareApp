@@ -8,7 +8,7 @@ import { z } from "zod";
 
 const BASE_URL = import.meta.env.DEV
   ? "https://localhost:5002/api/v1/"
-  : "/api/";
+  : "/api/v1/";
 
 axios.defaults.baseURL = BASE_URL;
 
