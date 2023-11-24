@@ -17,5 +17,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseDevelopmentSettings(app.Environment);
 app.UseCors(myAllowSpecificOrigins);
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.RegisterCodeSnippetEndpoints();
+app.MapFallbackToFile("index.html");
 app.Run();
