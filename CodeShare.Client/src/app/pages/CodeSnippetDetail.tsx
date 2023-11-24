@@ -1,7 +1,7 @@
-import LoadingMessage from "../app/components/LoadingMessage";
-import CodeSnippet from "../app/components/codeSnippet/detail/CodeSnippet";
-import CodeSnippetControls from "../app/components/codeSnippet/detail/CodeSnippetControls";
-import { useGetCodeSnippetQuery } from "../app/components/codeSnippet/detail/hooks/useGetCodeSnippetQuery";
+import LoadingMessage from "../components/LoadingMessage";
+import CodeSnippet from "../components/codeSnippet/detail/CodeSnippet";
+import CodeSnippetControls from "../components/codeSnippet/detail/CodeSnippetControls";
+import { useGetCodeSnippetQuery } from "../hooks/queries/useGetCodeSnippetQuery";
 
 const CodeSnippetDetail = () => {
   const { data, isLoading, error } = useGetCodeSnippetQuery();

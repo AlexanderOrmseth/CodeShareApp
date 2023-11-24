@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
-import Home from "../../pages/Home";
-import CodeSnippetDetail from "../../pages/CodeSnippetDetail";
-import NoMatch from "../../pages/NoMatch";
+import Home from "../pages/Home";
+import CodeSnippetDetail from "../pages/CodeSnippetDetail";
+import NoMatch from "../pages/NoMatch";
 
 const App = () => {
   return (

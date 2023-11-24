@@ -1,8 +1,8 @@
 import axios from "axios";
 import {
   CodeSnippet,
-  CodeSnippetPreview,
-  CreateCodeSnippet
+  CodeSnippetBase,
+  CodeSnippetPreview
 } from "../models/codeSnippet";
 import { z } from "zod";
 
@@ -19,8 +19,8 @@ function isValidGuid(id: string): boolean {
 }
 
 export interface ApiResponse<T> {
-  data?: T;
-  message?: string;
+  data: T;
+  message: string;
 }
 
 export interface ProblemDetails {
@@ -33,9 +33,9 @@ export interface ProblemDetails {
 const namespace = "code";
 
 const api = {
-  createCodeSnippet: async (values: CreateCodeSnippet, signal: AbortSignal) => {
+  createCodeSnippet: async (values: CodeSnippetBase, signal?: AbortSignal) => {
     return axios
-      .post<string>(namespace, values, { signal })
+      .post<ApiResponse<string>>(namespace, values, { signal })
       .then((res) => res.data);
   },
   getCodeSnippetById: async (id: string, signal: AbortSignal) => {
@@ -49,9 +49,9 @@ const api = {
     );
     return res.data;
   },
-  getCodeSnippetPreview: async (
-    values: CreateCodeSnippet,
-    signal: AbortSignal
+  createPreviewCodeSnippet: async (
+    values: CodeSnippetBase,
+    signal?: AbortSignal
   ) => {
     return axios
       .post<ApiResponse<CodeSnippetPreview>>(`${namespace}/preview`, values, {

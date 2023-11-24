@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import api from "../../../../services/api";
+import api from "../../services/api";
 
 export const useGetCodeSnippetQuery = () => {
   const { id } = useParams<{ id: string }>();

@@ -37,7 +37,8 @@ public class GetCodeSnippetPreviewHandler(
         {
             Author = request.CodeSnippet.Author,
             Title = request.CodeSnippet.Title,
-            Code = generatedHtml.Html,
+            Code = request.CodeSnippet.Code,
+            Html = generatedHtml.Html,
             LinesOfCode = generatedHtml.LinesOfCode,
         };
 
