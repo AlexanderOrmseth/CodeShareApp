@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CodeIframe from "./CodeIframe";
+import CodeIframe from "./CodeIframe/CodeIframe";
 import ScaleInput from "../../ScaleInput";
 
 interface Props {
