@@ -28,7 +28,7 @@ jobs:
         cache: 'npm'
 
     - name: Change to project directory
-      run: cd ./CodeShareApp/CodeShare.Client
+      run: cd CodeShare.Client
 
     - name: Install dependencies
       run: npm ci
@@ -37,4 +37,4 @@ jobs:
       run: npm run build --if-present
 
     - name: Run tests
-      run: npm run test
+      run: npm test
