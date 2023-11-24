@@ -6,7 +6,14 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./app/layout/App";
 import "./index.css";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 2,
+      retryDelay: 2000
+    }
+  }
+});
 const dev = import.meta.env.DEV;
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

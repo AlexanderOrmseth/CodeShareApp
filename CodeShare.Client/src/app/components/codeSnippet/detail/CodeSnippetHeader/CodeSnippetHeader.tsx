@@ -25,7 +25,10 @@ const CodeSnippetHeader = ({ headerDetails }: Props) => {
           <User size="1.25rem" />
           {headerDetails.author || "Unknown"}
         </span>
-        <time className="flex flex-wrap items-center justify-end gap-2">
+        <time
+          data-testid="time"
+          className="flex flex-wrap items-center justify-end gap-2"
+        >
           <Clock size="1.25rem" />
           {headerDetails.createdAt
             ? new Date(headerDetails.createdAt).toLocaleString()

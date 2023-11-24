@@ -4,12 +4,19 @@ import {
   CodeSnippetPreview,
   CreateCodeSnippet
 } from "../models/codeSnippet";
+import { z } from "zod";
 
 const BASE_URL = import.meta.env.DEV
   ? "https://localhost:5002/api/v1/"
   : "/api/";
 
 axios.defaults.baseURL = BASE_URL;
+
+const guidSchema = z.string().uuid();
+
+function isValidGuid(id: string): boolean {
+  return guidSchema.safeParse(id).success;
+}
 
 export interface ApiResponse<T> {
   data?: T;
@@ -32,6 +39,10 @@ const api = {
       .then((res) => res.data);
   },
   getCodeSnippetById: async (id: string, signal: AbortSignal) => {
+    if (!isValidGuid(id)) {
+      throw new Error("Invalid ID");
+    }
+
     const res = await axios.get<ApiResponse<CodeSnippet>>(
       `${namespace}/${id}`,
       { signal }

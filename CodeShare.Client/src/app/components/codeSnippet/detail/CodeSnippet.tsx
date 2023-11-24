@@ -1,6 +1,6 @@
 import CodeSnippetHeader, {
   CodeSnippetHeaderDetails
-} from "./CodeSnippetHeader";
+} from "./CodeSnippetHeader/CodeSnippetHeader";
 import CodeSnippetBody from "./CodeSnippetBody";
 
 interface Props {
