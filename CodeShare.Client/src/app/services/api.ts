@@ -6,16 +6,16 @@ import {
 } from "../models/codeSnippet";
 import { z } from "zod";
 
-const BASE_URL = import.meta.env.DEV
+const baseURL = import.meta.env.DEV
   ? "https://localhost:5002/api/v1/"
   : "/api/v1/";
 
-axios.defaults.baseURL = BASE_URL;
-
-const guidSchema = z.string().uuid();
+const axiosApi = axios.create({
+  baseURL
+});
 
 function isValidGuid(id: string): boolean {
-  return guidSchema.safeParse(id).success;
+  return z.string().uuid().safeParse(id).success;
 }
 
 export interface ApiResponse<T> {
@@ -23,41 +23,31 @@ export interface ApiResponse<T> {
   message: string;
 }
 
-export interface ProblemDetails {
-  type?: string;
-  title?: string;
-  status?: number;
-  detail?: string;
-  instance?: string;
-}
 const namespace = "code";
 
 const api = {
-  createCodeSnippet: async (values: CodeSnippetBase, signal?: AbortSignal) => {
-    return axios
-      .post<ApiResponse<string>>(namespace, values, { signal })
-      .then((res) => res.data);
+  createCodeSnippet: (values: CodeSnippetBase, signal?: AbortSignal) => {
+    return axiosApi.post<ApiResponse<string>>(namespace, values, {
+      signal
+    });
   },
-  getCodeSnippetById: async (id: string, signal: AbortSignal) => {
+  getCodeSnippetById: (id: string, signal: AbortSignal) => {
     if (!isValidGuid(id)) {
       throw new Error("Invalid ID");
     }
 
-    const res = await axios.get<ApiResponse<CodeSnippet>>(
-      `${namespace}/${id}`,
-      { signal }
-    );
-    return res.data;
+    return axiosApi.get<ApiResponse<CodeSnippet>>(`${namespace}/${id}`, {
+      signal
+    });
   },
-  createPreviewCodeSnippet: async (
-    values: CodeSnippetBase,
-    signal?: AbortSignal
-  ) => {
-    return axios
-      .post<ApiResponse<CodeSnippetPreview>>(`${namespace}/preview`, values, {
+  createPreviewCodeSnippet: (values: CodeSnippetBase, signal?: AbortSignal) => {
+    return axiosApi.post<ApiResponse<CodeSnippetPreview>>(
+      `${namespace}/preview`,
+      values,
+      {
         signal
-      })
-      .then((res) => res.data);
+      }
+    );
   }
 };
 

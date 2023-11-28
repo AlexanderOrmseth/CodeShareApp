@@ -8,7 +8,8 @@ const Home = () => {
   const {
     data: previewData,
     mutateAsync: createPreviewSnippet,
-    isPending: previewIsLoading
+    isPending: previewIsLoading,
+    isSuccess: isPreviewSuccess
   } = useCreatePreviewSnippetMutation();
 
   return (
@@ -19,7 +20,7 @@ const Home = () => {
         previewIsPending={previewIsLoading}
       />
       {previewData && (
-        <div className="mt-4">
+        <div role="region" aria-label="Code Snippet Preview" className="mt-4">
           <h2 className="mb-2 text-lg font-bold">Preview</h2>
           <CodeSnippet
             linesOfCode={previewData.linesOfCode}
@@ -31,6 +32,10 @@ const Home = () => {
           />
         </div>
       )}
+
+      <div className="sr-only" aria-live="polite">
+        {isPreviewSuccess && "Code snippet preview updated successfully!"}
+      </div>
     </div>
   );
 };

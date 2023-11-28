@@ -1,4 +1,5 @@
 import LoadingMessage from "../components/LoadingMessage";
+import ServerError from "../components/ServerError";
 import CodeSnippet from "../components/codeSnippet/detail/CodeSnippet";
 import CodeSnippetControls from "../components/codeSnippet/detail/CodeSnippetControls";
 import { useGetCodeSnippetQuery } from "../hooks/queries/useGetCodeSnippetQuery";
@@ -7,7 +8,7 @@ const CodeSnippetDetail = () => {
   const { data, isLoading, error } = useGetCodeSnippetQuery();
 
   if (isLoading) return <LoadingMessage message="Fetching..." />;
-  if (error) return "An error has occurred: " + error.message;
+  if (error) return <ServerError error={error} />;
 
   return (
     data && (

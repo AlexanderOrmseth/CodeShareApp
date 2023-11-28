@@ -7,11 +7,11 @@ export const useGetCodeSnippetQuery = () => {
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["code", id],
+
     queryFn: async ({ signal }) => {
       const response = await api.getCodeSnippetById(id as string, signal);
-      return response.data;
+      return response.data.data;
     },
-
     staleTime: Infinity
   });
 

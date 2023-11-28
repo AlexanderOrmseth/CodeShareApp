@@ -1,6 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { FormModel, FormValidation } from "./validators/codeSnippetValidator";
+import {
+  FormModel,
+  FormValidation,
+  ValidationErrors,
+  ValidationErrorsSchema
+} from "./validators/codeSnippetValidator";
 import FormTextField from "../../common/FormTextField/FormTextField";
 import { Code, Info, Share } from "react-feather";
 import LoadingButton from "../../LoadingButton";
@@ -10,6 +15,7 @@ import {
 } from "../../../models/codeSnippet";
 import { UseMutateAsyncFunction } from "@tanstack/react-query";
 import FormTextArea from "../../common/FormTextAreaField/FormTextArea";
+import toast from "react-hot-toast";
 
 interface Props {
   submitFn: UseMutateAsyncFunction<string, unknown, CodeSnippetBase, unknown>;
@@ -31,20 +37,44 @@ const CodeSnippetForm = ({
     register,
     getValues,
     handleSubmit,
+    setError,
     formState: { isSubmitting, isValid, isDirty, errors }
   } = useForm<FormModel>({
     resolver: zodResolver(FormValidation)
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleErrors = (err: any) => {
+    if (
+      err?.response?.data &&
+      ValidationErrorsSchema.safeParse(err.response.data).success
+    ) {
+      const serverErrors: ValidationErrors = err.response.data;
+      for (const [field, messages] of Object.entries(serverErrors.errors)) {
+        setError(field as keyof FormModel, {
+          type: "server",
+          message: messages.join(", ")
+        });
+      }
+    } else {
+      toast.error("Something went wrong, please try again");
+    }
+  };
+
   const onSubmit = async (data: FormModel) => {
-    console.log(data);
-    await submitFn(data);
+    try {
+      await submitFn(data);
+    } catch (err) {
+      handleErrors(err);
+    }
   };
 
   const createPreview = async () => {
-    const formValues: FormModel = getValues();
-    // HOW CAN I MAKE THE FORM LOAD WHILE WE WAIT FOR THIS?
-    await createPreviewFn(formValues);
+    try {
+      await createPreviewFn(getValues());
+    } catch (err) {
+      handleErrors(err);
+    }
   };
 
   return (
@@ -54,53 +84,61 @@ const CodeSnippetForm = ({
       onSubmit={handleSubmit(onSubmit)}
     >
       <header className="border-dark-400 mb-4 border-b pb-2 ">
-        <h2 className="mb-2 text-lg font-bold">Share C# Code</h2>
-        <div className="flex flex-wrap items-center gap-x-2 text-sm leading-4 text-slate-50/50">
-          <Info size={16} />
-          <em className="flex-1">Code is periodically deleted every 6 hours</em>
+        <h2 className="mb-2 text-lg font-bold">Create code snippet</h2>
+        <div className="flex flex-wrap items-center gap-x-2 text-sm leading-4 text-slate-300/90">
+          <Info aria-hidden="true" size={16} />
+          <p className="flex-1">
+            Please note that your code snippet will be public and accessible to
+            anyone with the link. Do <em>not</em> upload sensitive or personal
+            information. Code snippets are periodically deleted.
+          </p>
         </div>
       </header>
+      <fieldset
+        disabled={isSubmitting || previewIsPending}
+        className="space-y-4"
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          <FormTextField
+            label="Title"
+            maxLength={32}
+            register={register("title")}
+            error={errors.title}
+          />
+          <FormTextField
+            label="Author"
+            maxLength={32}
+            register={register("author")}
+            error={errors.author}
+          />
+        </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <FormTextField
-          label="Title"
-          maxLength={32}
-          register={register("title")}
-          error={errors.title}
+        <FormTextArea
+          required
+          label="Code"
+          rows={10}
+          maxLength={4000}
+          register={register("code")}
+          error={errors.code}
         />
-        <FormTextField
-          label="Author"
-          maxLength={32}
-          register={register("author")}
-          error={errors.author}
-        />
-      </div>
-
-      <FormTextArea
-        required
-        label="Code"
-        rows={10}
-        maxLength={4000}
-        register={register("code")}
-        error={errors.code}
-      />
+      </fieldset>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <LoadingButton
           type="submit"
-          disabled={!isValid}
-          loading={isSubmitting || previewIsPending}
+          disabled={!isValid || previewIsPending}
+          loading={isSubmitting}
           loadingText="Uploading code..."
-          icon={<Share size="1.25rem" />}
+          Icon={Share}
           buttonText="Upload And Share"
         />
         <LoadingButton
           type="button"
-          disabled={!isValid || !isDirty}
-          loading={isSubmitting || previewIsPending}
+          disabled={!isValid || !isDirty || isSubmitting}
+          loading={previewIsPending}
           loadingText="Fetching preview..."
           onClick={createPreview}
-          icon={<Code size="1.25rem" />}
+          Icon={Code}
           buttonText="Preview Code Snippet"
         />
       </div>

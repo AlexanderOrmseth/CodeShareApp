@@ -6,9 +6,16 @@ interface Props {
 
 const LoadingMessage = ({ message }: Props) => {
   return (
-    <div className="flex items-center justify-center flex-row gap-2 my-2">
+    <div
+      role="status"
+      aria-live="polite"
+      className="flex items-center justify-center flex-row gap-2 my-2"
+    >
       <LoaderIcon size={20} />
-      <em className="text-disabled-color">{message}</em>
+      <span className="text-disabled-color" aria-hidden="true">
+        {message}
+      </span>
+      <span className="sr-only">Loading: {message}</span>
     </div>
   );
 };

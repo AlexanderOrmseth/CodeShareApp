@@ -7,3 +7,12 @@ export const FormValidation = z.object({
 });
 
 export type FormModel = z.infer<typeof FormValidation>;
+
+export const ValidationErrorsSchema = z.object({
+  title: z.string(),
+  status: z.number(),
+  type: z.string(),
+  errors: z.record(z.array(z.string()))
+});
+
+export type ValidationErrors = z.infer<typeof ValidationErrorsSchema>;

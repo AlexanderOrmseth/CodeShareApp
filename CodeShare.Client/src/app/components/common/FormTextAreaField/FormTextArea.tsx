@@ -21,11 +21,11 @@ const FormTextArea = ({ register, error, label, required, ...rest }: Props) => {
       <label className="label" htmlFor={id}>
         {label}
         {required ? (
-          <span className="ml-1 text-red-400">
-            * <span className="text-purple-300">(required)</span>
+          <span className="ml-1 text-red-300">
+            * <span className="text-gray-300">(required)</span>
           </span>
         ) : (
-          <span className="ml-1 text-purple-300">(optional)</span>
+          <span className="ml-1 text-gray-300">(optional)</span>
         )}
       </label>
       <textarea
@@ -35,16 +35,16 @@ const FormTextArea = ({ register, error, label, required, ...rest }: Props) => {
         aria-describedby={error ? errorId : undefined}
         className={`text-input ${
           error
-            ? "border-red-500  text-red-400 placeholder:text-transparent"
+            ? "border-red-400  text-red-300 placeholder:text-transparent"
             : ""
         }`}
         {...register}
         {...rest}
       />
       {error && (
-        <em id={errorId} className="text-sm italic text-red-400">
+        <p id={errorId} className="text-sm italic text-red-300">
           {error.message}
-        </em>
+        </p>
       )}
     </div>
   );

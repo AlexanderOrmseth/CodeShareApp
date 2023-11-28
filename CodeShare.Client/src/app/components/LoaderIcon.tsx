@@ -5,6 +5,7 @@ interface Props {
 const LoaderIcon = ({ size }: Props) => {
   return (
     <div
+      aria-hidden="true"
       style={{ width: size, height: size }}
       className={`relative overflow-hidden flex items-center`}
     >

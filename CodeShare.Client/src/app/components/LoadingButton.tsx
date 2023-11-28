@@ -1,9 +1,10 @@
-import { ReactNode, ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from "react";
 import LoaderIcon from "./LoaderIcon";
+import { IconProps } from "react-feather";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading: boolean;
-  icon?: ReactNode;
+  Icon?: React.FunctionComponent<IconProps>;
   loadingText: string;
   buttonText: string;
 }
@@ -11,7 +12,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 const LoadingButton = ({
   loading,
   buttonText,
-  icon,
+  Icon,
   loadingText,
   ...buttonProps
 }: Props) => {
@@ -30,7 +31,7 @@ const LoadingButton = ({
         </>
       ) : (
         <>
-          {icon && icon}
+          {Icon && <Icon aria-hidden="true" size="1.25rem" />}
           {buttonText}
         </>
       )}

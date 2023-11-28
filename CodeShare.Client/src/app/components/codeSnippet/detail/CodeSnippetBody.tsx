@@ -13,7 +13,11 @@ const CodeSnippetBody = ({ html, linesOfCode }: Props) => {
 
   return (
     <>
-      <ScaleInput scale={scale} setScale={setScale} />
+      <ScaleInput
+        labelText="Adjust zoom level for code snippet"
+        scale={scale}
+        setScale={setScale}
+      />
       <CodeIframe html={html} height={height} scale={scale} />
     </>
   );
