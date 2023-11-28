@@ -15,6 +15,7 @@ interface Props extends TextAreaProps {
 
 const FormTextArea = ({ register, error, label, required, ...rest }: Props) => {
   const id = useId();
+  const errorId = `${id}-error`;
   return (
     <div>
       <label className="label" htmlFor={id}>
@@ -30,6 +31,8 @@ const FormTextArea = ({ register, error, label, required, ...rest }: Props) => {
       <textarea
         autoComplete="off"
         id={id}
+        aria-required={required ? "true" : "false"}
+        aria-describedby={error ? errorId : undefined}
         className={`text-input ${
           error
             ? "border-red-500  text-red-400 placeholder:text-transparent"
@@ -39,7 +42,9 @@ const FormTextArea = ({ register, error, label, required, ...rest }: Props) => {
         {...rest}
       />
       {error && (
-        <em className="text-sm italic text-red-400">{error.message}</em>
+        <em id={errorId} className="text-sm italic text-red-400">
+          {error.message}
+        </em>
       )}
     </div>
   );

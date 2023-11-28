@@ -21,6 +21,7 @@ const FormTextField = ({
   ...rest
 }: Props) => {
   const id = useId();
+  const errorId = `${id}-error`;
 
   // prevent from submitting by pressing enter inside input
   const checkKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -43,6 +44,8 @@ const FormTextField = ({
         onKeyDown={(e) => checkKeyDown(e)}
         autoComplete="off"
         id={id}
+        aria-required={required ? "true" : "false"}
+        aria-describedby={error ? errorId : undefined}
         className={`text-input ${
           error
             ? "border-red-500  text-red-400 placeholder:text-transparent"
@@ -52,7 +55,9 @@ const FormTextField = ({
         {...rest}
       />
       {error && (
-        <em className="text-sm italic text-red-400">{error.message}</em>
+        <em id={errorId} className="text-sm italic text-red-400">
+          {error.message}
+        </em>
       )}
     </div>
   );
