@@ -7,9 +7,12 @@ const Header = () => {
     <nav className="mx-auto h-12 flex max-w-screen-2xl items-center justify-between">
       <Link
         to="/"
+        aria-label="Go to CodeShare home page"
         className="flex items-center gap-x-2 px-2 font-bold hover:text-white/90"
       >
         <svg
+          aria-hidden="true"
+          focusable="false"
           xmlns="http://www.w3.org/2000/svg"
           className="fill-c-sharp h-7 select-none"
           viewBox="0 0 32 32"
@@ -21,7 +24,11 @@ const Header = () => {
         <h1>CodeShare</h1>
       </Link>
       {location.pathname !== "/" && (
-        <Link className="btn-primary" to="/">
+        <Link
+          className="btn-primary"
+          to="/"
+          aria-label="Create a new code snippet"
+        >
           New
         </Link>
       )}

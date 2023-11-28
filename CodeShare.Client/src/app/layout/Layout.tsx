@@ -19,7 +19,7 @@ const Layout = () => {
         >
           Scroll to top
         </button>
-        <em className="block">Made by Alexander Ormseth &copy; 2022</em>
+        <p className="block">Made by Alexander Ormseth &copy; 2022</p>
       </footer>
     </>
   );
