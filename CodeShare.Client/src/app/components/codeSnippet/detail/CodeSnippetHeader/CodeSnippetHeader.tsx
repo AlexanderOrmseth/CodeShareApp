@@ -30,6 +30,7 @@ const CodeSnippetHeader = ({ headerDetails }: Props) => {
       className="border-dark-400 mb-4 items-center gap-x-4 border-b pb-2 text-sm text-gray-100/70 md:flex"
     >
       <h3
+        data-testid="title"
         id="title"
         aria-label={
           headerDetails.title || !headerDetails.id
@@ -47,6 +48,7 @@ const CodeSnippetHeader = ({ headerDetails }: Props) => {
       </h3>
       <div className="mt-1.5 flex flex-row flex-wrap items-center gap-x-4 gap-y-1 md:mt-0">
         <span
+          data-testid="createdBy"
           id="createdBy"
           className="flex items-center justify-end gap-2"
           aria-label={`Created by ${createdBy}`}

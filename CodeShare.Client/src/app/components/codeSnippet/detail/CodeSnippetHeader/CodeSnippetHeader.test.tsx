@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import CodeSnippetHeader, {
   CodeSnippetHeaderDetails
 } from "./CodeSnippetHeader";
-
 describe("CodeSnippetHeader", () => {
   const defaultProps: CodeSnippetHeaderDetails = {
     id: "8c6a6ee9-1771-42a1-f322-08dbecc7d768",
@@ -13,28 +12,35 @@ describe("CodeSnippetHeader", () => {
 
   it("renders title correctly", () => {
     render(<CodeSnippetHeader headerDetails={defaultProps} />);
-    const title = screen.getByRole("heading", { name: defaultProps.title });
+    const title = screen.getByTestId("title");
     expect(title).toBeInTheDocument();
+    expect(title.textContent).toBe(defaultProps.title);
   });
 
   it("renders author correctly", () => {
     render(<CodeSnippetHeader headerDetails={defaultProps} />);
-    const author = screen.getByText(defaultProps.author!);
+    const author = screen.getByTestId("createdBy");
     expect(author).toBeInTheDocument();
+    expect(author.textContent).toContain(defaultProps.author);
   });
 
   it("renders unknown author when author is not provided", () => {
     const props = { ...defaultProps, author: undefined };
     render(<CodeSnippetHeader headerDetails={props} />);
-    const author = screen.getByText("Unknown");
+    const author = screen.getByTestId("createdBy");
     expect(author).toBeInTheDocument();
+    expect(author.textContent).toContain("Unknown");
   });
 
   it("renders created date correctly", () => {
     render(<CodeSnippetHeader headerDetails={defaultProps} />);
     const time = screen.getByTestId("time");
+    expect(time).toBeInTheDocument();
     expect(time.textContent).toEqual(
-      new Date(defaultProps.createdAt!).toLocaleString()
+      new Date(defaultProps.createdAt!).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+      })
     );
   });
 
@@ -44,6 +50,12 @@ describe("CodeSnippetHeader", () => {
 
     const time = screen.getByTestId("time");
     expect(time).toBeInTheDocument();
-    expect(isNaN(Date.parse(time.textContent!))).toBeFalsy();
+
+    const currentFormattedTime = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+
+    expect(time.textContent).toEqual(currentFormattedTime);
   });
 });
