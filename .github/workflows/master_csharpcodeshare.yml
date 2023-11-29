@@ -16,6 +16,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+         node-version: 18
+         
+      - name: Install dependencies
+        run: cd CodeShare.Client && npm ci
+
+      - name: Run tests
+        run: cd CodeShare.Client && npm test
+
+      - name: Build React app
+        run: cd CodeShare.Client && npm run build
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
