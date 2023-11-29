@@ -24,7 +24,7 @@ public static class DependencyInjection
                     else
                     {
                         builder
-                            .WithOrigins("TODO: REPLACE THIS")
+                            .WithOrigins("https://csharpcodeshare.azurewebsites.net/")
                             .AllowAnyHeader()
                             .WithMethods("GET", "POST");
                     }

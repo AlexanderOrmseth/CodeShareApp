@@ -16,6 +16,7 @@ import {
 import { UseMutateAsyncFunction } from "@tanstack/react-query";
 import FormTextArea from "../../common/FormTextAreaField/FormTextArea";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 interface Props {
   submitFn: UseMutateAsyncFunction<string, unknown, CodeSnippetBase, unknown>;
@@ -57,6 +58,10 @@ const CodeSnippetForm = ({
         });
       }
     } else {
+      // skip 429 errors, they are handled in queryClient
+      if (err instanceof AxiosError && err?.response?.status === 429) {
+        return;
+      }
       toast.error("Something went wrong, please try again");
     }
   };
