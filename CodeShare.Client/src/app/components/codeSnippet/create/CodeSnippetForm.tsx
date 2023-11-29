@@ -8,7 +8,7 @@ import {
 } from "./validators/codeSnippetValidator";
 import FormTextField from "../../common/FormTextField/FormTextField";
 import { Code, Info, Share } from "react-feather";
-import LoadingButton from "../../LoadingButton";
+import LoadingButton from "../../common/LoadingButton/LoadingButton";
 import {
   CodeSnippetPreview,
   CodeSnippetBase
