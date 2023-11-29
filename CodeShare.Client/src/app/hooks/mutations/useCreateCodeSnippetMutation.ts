@@ -9,7 +9,6 @@ export const useCreateCodeSnippetMutation = () => {
   const mutation = useMutation({
     mutationFn: async (data: CodeSnippetBase) => {
       const response = await api.createCodeSnippet(data);
-      console.log(response);
       return response.data.data;
     },
     onSuccess: (data: string) => navigate(`code/${data}`)
