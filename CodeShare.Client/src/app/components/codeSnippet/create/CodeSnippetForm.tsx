@@ -125,14 +125,6 @@ const CodeSnippetForm = ({
 
       <div className="grid gap-4 sm:grid-cols-2">
         <LoadingButton
-          type="submit"
-          disabled={!isValid || previewIsPending}
-          loading={isSubmitting}
-          loadingText="Uploading code..."
-          Icon={Share}
-          buttonText="Upload And Share"
-        />
-        <LoadingButton
           type="button"
           disabled={!isValid || !isDirty || isSubmitting}
           loading={previewIsPending}
@@ -140,6 +132,14 @@ const CodeSnippetForm = ({
           onClick={createPreview}
           Icon={Code}
           buttonText="Preview Code Snippet"
+        />
+        <LoadingButton
+          type="submit"
+          disabled={!isValid || previewIsPending}
+          loading={isSubmitting}
+          loadingText="Uploading code..."
+          Icon={Share}
+          buttonText="Upload And Share"
         />
       </div>
     </form>
