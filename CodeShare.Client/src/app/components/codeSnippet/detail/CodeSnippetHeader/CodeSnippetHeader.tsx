@@ -27,7 +27,7 @@ const CodeSnippetHeader = ({ headerDetails }: Props) => {
   return (
     <header
       role="banner"
-      className="border-dark-400 mb-4 items-center gap-x-4 border-b pb-2 text-sm text-gray-100/70 md:flex"
+      className="border-dark-300 mb-4 items-center gap-x-4 border-b pb-2 text-sm text-gray-100/70 md:flex"
     >
       <h3
         data-testid="title"
