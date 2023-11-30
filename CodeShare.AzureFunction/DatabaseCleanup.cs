@@ -9,7 +9,7 @@ namespace CodeShare.AzureFunction;
 public static class DatabaseCleanup
 {
     [FunctionName("DatabaseCleanup")]
-    public static async Task Run([TimerTrigger("0 0 */2 * * *")] TimerInfo myTimer, ILogger log)
+    public static async Task Run([TimerTrigger("0 0 */3 * * *")] TimerInfo myTimer, ILogger log)
     {
         try
         {
@@ -22,7 +22,7 @@ public static class DatabaseCleanup
 
             // SQL command
             const string sqlCommandText =
-                "DELETE FROM [dbo].[CodeSnippets] WHERE [CreatedAt] < DATEADD(HOUR, -1, GETDATE());";
+                "DELETE FROM [dbo].[CodeSnippets] WHERE [CreatedAt] < DATEADD(HOUR, -3, GETDATE());";
             using SqlCommand cmd = new SqlCommand(sqlCommandText, conn);
 
             // Execute command and log how many rows were deleted
