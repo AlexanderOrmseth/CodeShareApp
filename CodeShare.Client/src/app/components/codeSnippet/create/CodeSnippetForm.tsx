@@ -95,7 +95,7 @@ const CodeSnippetForm = ({
           <p className="flex-1">
             Please note that your code snippet will be public and accessible to
             anyone with the link. Do <em>not</em> upload sensitive or personal
-            information. Code snippets are periodically deleted.
+            information. Code snippets are periodically deleted every 3 hours.
           </p>
         </div>
       </header>

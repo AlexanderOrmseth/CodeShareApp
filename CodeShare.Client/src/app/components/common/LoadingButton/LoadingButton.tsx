@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
-import LoaderIcon from "../../LoaderIcon";
+import LoaderIcon from "../LoaderIcon/LoaderIcon";
 import { IconProps } from "react-feather";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {

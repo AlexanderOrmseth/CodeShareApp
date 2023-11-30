@@ -1,5 +1,5 @@
-import LoadingMessage from "../components/LoadingMessage";
-import ServerError from "../components/ServerError";
+import LoadingMessage from "../components/common/LoadingMessage/LoadingMessage";
+import ServerError from "../components/common/ServerError/ServerError";
 import CodeSnippet from "../components/codeSnippet/detail/CodeSnippet";
 import CodeSnippetControls from "../components/codeSnippet/detail/CodeSnippetControls";
 import { useGetCodeSnippetQuery } from "../hooks/queries/useGetCodeSnippetQuery";
