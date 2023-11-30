@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import FormTextArea from "./FormTextArea";
 
 describe("FormTextArea", () => {
@@ -54,5 +54,22 @@ describe("FormTextArea", () => {
     const errorMessage = screen.getByText("Test error");
     expect(errorMessage).toBeInTheDocument();
     expect(errorMessage.textContent).toBe("Test error");
+  });
+
+  it("renders the char count and updates it correctly", () => {
+    render(
+      <FormTextArea
+        register={mockRegister}
+        label="Test Label"
+        maxLength={100}
+      />
+    );
+    const textarea = screen.getByRole("textbox", { name: /Test Label/i });
+    fireEvent.change(textarea, { target: { value: "Test Char Count" } });
+
+    const characterCount = screen.getByText("15/100");
+
+    expect(mockRegister.onChange).toHaveBeenCalled();
+    expect(characterCount).toBeInTheDocument();
   });
 });
