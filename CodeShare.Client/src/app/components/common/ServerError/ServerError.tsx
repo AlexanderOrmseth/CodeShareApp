@@ -15,7 +15,7 @@ const ProblemDetailsSchema = z.object({
   type: z.string().optional()
 });
 
-// type ProblemDetails = z.infer<typeof ProblemDetailsSchema>;
+type ProblemDetails = z.infer<typeof ProblemDetailsSchema>;
 
 const ServerError = memo(({ error }: Props) => {
   if (!error) {
