@@ -1,4 +1,4 @@
-import LoaderIcon from "./LoaderIcon";
+import LoaderIcon from "../LoaderIcon/LoaderIcon";
 
 interface Props {
   message: string;

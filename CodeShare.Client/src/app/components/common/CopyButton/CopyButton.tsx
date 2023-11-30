@@ -4,7 +4,7 @@ import { Copy, ThumbsUp, IconProps } from "react-feather";
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   data: string;
   buttonText: string;
-  Icon: React.FunctionComponent<IconProps>;
+  Icon?: React.FunctionComponent<IconProps>;
 }
 
 const CopyButton = ({ data, buttonText, Icon, ...buttonProps }: Props) => {

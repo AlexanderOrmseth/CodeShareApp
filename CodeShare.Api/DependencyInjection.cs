@@ -64,7 +64,7 @@ public static class DependencyInjection
         {
             var title = "CSharpCodeShare API";
             var description =
-                "An API designed to generate and share C# code snippets with syntax highlighting. This service provides a platform for users to create, view, and share C# code in a syntax-highlighted format. The API includes functionality for periodic deletion of old code snippets, ensuring a clean and efficient code-sharing experience.";
+                "An API designed to generate and share C# code snippets with syntax highlighting.";
 
             var contact = new OpenApiContact
             {
