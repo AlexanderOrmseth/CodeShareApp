@@ -84,11 +84,11 @@ const CodeSnippetForm = ({
 
   return (
     <form
-      className="bg-visual-studio-bg border-dark-700 space-y-4 rounded-lg border p-4 md:p-6"
+      className="bg-visual-studio-bg border-dark-300 space-y-4 rounded-lg border p-4 md:p-6"
       spellCheck={false}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <header className="border-dark-400 mb-4 border-b pb-2 ">
+      <header className="border-dark-300 mb-4 border-b pb-2 ">
         <h2 className="mb-2 text-lg font-bold">Create code snippet</h2>
         <div className="flex flex-wrap items-center gap-x-2 text-sm leading-4 text-slate-300/90">
           <Info aria-hidden="true" size={16} />
