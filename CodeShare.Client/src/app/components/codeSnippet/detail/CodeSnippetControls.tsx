@@ -1,4 +1,4 @@
-import CopyButton from "../../CopyButton";
+import CopyButton from "../../common/CopyButton/CopyButton";
 import { Code as CodeIcon, Link2 as LinkIcon } from "react-feather";
 
 interface Props {
