@@ -1,4 +1,4 @@
-import CodeSnippetForm from "../components/codeSnippet/create/CodeSnippetForm";
+import CodeSnippetForm from "../components/codeSnippet/create/CodeSnippetForm/CodeSnippetForm";
 import CodeSnippet from "../components/codeSnippet/detail/CodeSnippet";
 import { useCreateCodeSnippetMutation } from "../hooks/mutations/useCreateCodeSnippetMutation";
 import { useCreatePreviewSnippetMutation } from "../hooks/mutations/useCreatePreviewSnippetMutation";
