@@ -5,7 +5,7 @@ import {
   FormValidation,
   ValidationErrors,
   ValidationErrorsSchema
-} from "../validators/codeSnippetValidator";
+} from "./codeSnippetValidator";
 import FormTextField from "../../../common/FormTextField/FormTextField";
 import { Code, Info, Share } from "react-feather";
 import LoadingButton from "../../../common/LoadingButton/LoadingButton";
