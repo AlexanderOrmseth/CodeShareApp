@@ -23,11 +23,7 @@ const ServerError = memo(({ error }: Props) => {
   }
 
   const data = error?.response?.data;
-  let detailMessage = "Unknown error, something went wrong";
-
-  if (error?.message) {
-    detailMessage = error.message;
-  }
+  let detailMessage = error?.message || "Unknown error, something went wrong";
 
   if (ProblemDetailsSchema.safeParse(data).success) {
     detailMessage = data.detail;

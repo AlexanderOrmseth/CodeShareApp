@@ -1,5 +1,6 @@
 import { useId, useState } from "react";
 import { UseFormRegisterReturn, FieldError } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type TextAreaProps = React.DetailedHTMLProps<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,
@@ -19,9 +20,22 @@ const FormTextArea = ({ register, error, label, required, ...rest }: Props) => {
 
   const [charCount, setCharCount] = useState(0);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
     register.onChange(event);
     setCharCount(event.target.value.length);
+  };
+
+  const handleOnPaste = (
+    event: React.ClipboardEvent<HTMLTextAreaElement>
+  ): void => {
+    const clipboardLength = event.clipboardData.getData("Text")?.length;
+    if (rest.maxLength && clipboardLength > rest.maxLength) {
+      toast.error(
+        `Pasting was partially successful. Only ${rest.maxLength} characters were accepted.`
+      );
+    }
   };
 
   return (
@@ -53,6 +67,7 @@ const FormTextArea = ({ register, error, label, required, ...rest }: Props) => {
         }`}
         {...register}
         {...rest}
+        onPaste={handleOnPaste}
         onChange={handleInputChange}
       />
 
