@@ -47,8 +47,14 @@ public class GetCodeSnippetByIdHandler(ICodeSnippetRepository repository, IHtmlG
         if (timespan.TotalMinutes < 2)
             return "just now";
         else if (timespan.TotalHours < 1)
-            return $"{timespan.Minutes} minute{(timespan.Minutes > 1 ? "s" : "")} ago";
+            return $"{timespan.Minutes} minute{(timespan.Minutes != 1 ? "s" : "")} ago";
+        else if (timespan <= TimeSpan.FromHours(1))
+            return $"{timespan.Hours} hour{(timespan.Hours != 1 ? "s" : "")} ago";
+        else if (timespan <= TimeSpan.FromDays(30))
+            return $"{timespan.Days} day{(timespan.Days != 1 ? "s" : "")} ago";
+        else if (timespan <= TimeSpan.FromDays(365))
+            return $"{timespan.Days / 30} month{(timespan.Days / 30 != 1 ? "s" : "")} ago";
         else
-            return $"{timespan.Hours} hour{(timespan.Hours > 1 ? "s" : "")} ago";
+            return $"{timespan.Days / 365} year{(timespan.Days / 365 != 1 ? "s" : "")} ago";
     }
 }

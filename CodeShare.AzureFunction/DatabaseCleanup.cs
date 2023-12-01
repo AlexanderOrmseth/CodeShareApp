@@ -22,7 +22,7 @@ public static class DatabaseCleanup
 
             // SQL command
             const string sqlCommandText =
-                "DELETE FROM [dbo].[CodeSnippets] WHERE [CreatedAt] < DATEADD(HOUR, -3, GETDATE());";
+                "DELETE FROM [dbo].[CodeSnippets] WHERE [CreatedAt] < DATEADD(HOUR, -3, GETDATE()) AND [Id] != '0cbe2e0b-9186-453f-41c4-08dbf2568673';";
             using SqlCommand cmd = new SqlCommand(sqlCommandText, conn);
 
             // Execute command and log how many rows were deleted
