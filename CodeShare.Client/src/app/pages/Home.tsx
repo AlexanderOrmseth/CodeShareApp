@@ -1,3 +1,4 @@
+import { useSpring, animated } from "react-spring";
 import CodeSnippetForm from "../components/codeSnippet/create/CodeSnippetForm/CodeSnippetForm";
 import CodeSnippet from "../components/codeSnippet/detail/CodeSnippet";
 import { useCreateCodeSnippetMutation } from "../hooks/mutations/useCreateCodeSnippetMutation";
@@ -12,13 +13,22 @@ const Home = () => {
     isSuccess: isPreviewSuccess
   } = useCreatePreviewSnippetMutation();
 
+  const styles = useSpring({
+    opacity: 1,
+    transform: "translateY(0)",
+    from: { opacity: 0, transform: "translateY(10px)" }
+  });
+
   return (
     <div>
-      <CodeSnippetForm
-        submitFn={createCodeSnippet}
-        createPreviewFn={createPreviewSnippet}
-        previewIsPending={previewIsLoading}
-      />
+      <animated.div style={styles}>
+        <CodeSnippetForm
+          submitFn={createCodeSnippet}
+          createPreviewFn={createPreviewSnippet}
+          previewIsPending={previewIsLoading}
+        />
+      </animated.div>
+
       {previewData && (
         <div role="region" aria-label="Code Snippet Preview" className="mt-4">
           <h2 className="mb-2 text-lg font-bold">Preview</h2>

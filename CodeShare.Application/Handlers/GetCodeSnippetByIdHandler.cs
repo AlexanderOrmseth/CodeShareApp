@@ -30,7 +30,7 @@ public class GetCodeSnippetByIdHandler(ICodeSnippetRepository repository, IHtmlG
         {
             Id = codeSnippet.Id,
             Author = codeSnippet.Author,
-            CreatedAt = codeSnippet.CreatedAt,
+            CreatedAt = GetRelativeTime(codeSnippet.CreatedAt),
             Title = codeSnippet.Title,
             Code = codeSnippet.Code,
             Html = generatedHtml.Html,
@@ -38,5 +38,17 @@ public class GetCodeSnippetByIdHandler(ICodeSnippetRepository repository, IHtmlG
         };
 
         return response.WithData(data);
+    }
+
+    public static string GetRelativeTime(DateTime dateTime)
+    {
+        var timespan = DateTime.UtcNow - dateTime;
+
+        if (timespan.TotalMinutes < 2)
+            return "just now";
+        else if (timespan.TotalHours < 1)
+            return $"{timespan.Minutes} minute{(timespan.Minutes > 1 ? "s" : "")} ago";
+        else
+            return $"{timespan.Hours} hour{(timespan.Hours > 1 ? "s" : "")} ago";
     }
 }
