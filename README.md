@@ -6,7 +6,7 @@ CodeShareApp is a simple web application that allows users to create and share C
 
 ### Live Demo
 
-Explore the live demo: [CodeShareApp](https://csharpcodeshare.azurewebsites.net)
+Explore the live demo: [CodeShareApp](https://csharpcodeshare.azurewebsites.net/code/0cbe2e0b-9186-453f-41c4-08dbf2568673)
 
 ![image](https://github.com/AlexanderOrmseth/CodeShareApp/assets/33042077/bd4bf88a-ccf2-40b9-a6e1-51fe5cc14c9b)
 
