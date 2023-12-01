@@ -2,12 +2,13 @@ import { render, screen } from "@testing-library/react";
 import CodeSnippetHeader, {
   CodeSnippetHeaderDetails
 } from "./CodeSnippetHeader";
+
 describe("CodeSnippetHeader", () => {
   const defaultProps: CodeSnippetHeaderDetails = {
     id: "8c6a6ee9-1771-42a1-f322-08dbecc7d768",
     title: "My test title",
     author: "Alexander",
-    createdAt: "2019-02-01T00:00:00.000Z"
+    createdAt: "1 hour ago"
   };
 
   it("renders title correctly", () => {
@@ -32,30 +33,19 @@ describe("CodeSnippetHeader", () => {
     expect(author.textContent).toContain("Unknown");
   });
 
-  it("renders created date correctly", () => {
+  it("renders time ago correctly", () => {
     render(<CodeSnippetHeader headerDetails={defaultProps} />);
     const time = screen.getByTestId("time");
     expect(time).toBeInTheDocument();
-    expect(time.textContent).toEqual(
-      new Date(defaultProps.createdAt!).toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
-      })
-    );
+    expect(time.textContent).toEqual(defaultProps.createdAt);
   });
 
-  it("renders current date when created date is not provided", () => {
+  it("renders 'just now' when time is not provided", () => {
     const props = { ...defaultProps, createdAt: undefined };
     render(<CodeSnippetHeader headerDetails={props} />);
 
     const time = screen.getByTestId("time");
     expect(time).toBeInTheDocument();
-
-    const currentFormattedTime = new Date().toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-
-    expect(time.textContent).toEqual(currentFormattedTime);
+    expect(time.textContent).toEqual("just now");
   });
 });

@@ -12,16 +12,6 @@ interface Props {
 }
 
 const CodeSnippetHeader = ({ headerDetails }: Props) => {
-  const formattedTime = headerDetails.createdAt
-    ? new Date(headerDetails.createdAt).toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
-      })
-    : new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-
   const createdBy = headerDetails.author || "Unknown";
 
   return (
@@ -60,11 +50,12 @@ const CodeSnippetHeader = ({ headerDetails }: Props) => {
           data-testid="time"
           id="creationTime"
           className="flex flex-wrap items-center justify-end gap-2"
-          dateTime={formattedTime}
-          aria-label={`Creation time: ${formattedTime}`}
+          aria-label={`Creation time: ${
+            headerDetails.createdAt ? headerDetails.createdAt : "just now"
+          }`}
         >
           <Clock aria-hidden="true" size="1.25rem" />
-          {formattedTime}
+          {headerDetails.createdAt ? headerDetails.createdAt : "just now"}
         </time>
       </div>
     </header>
