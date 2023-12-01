@@ -45,7 +45,13 @@ const CodeSnippetForm = ({
   });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleErrors = (err: any) => {
+  const handleErrors = (err: any): void => {
+    // skip 429 errors, they are handled in queryClient
+    if (err instanceof AxiosError && err?.response?.status === 429) {
+      return;
+    }
+
+    // validation errors from server
     if (
       err?.response?.data &&
       ValidationErrorsSchema.safeParse(err.response.data).success
@@ -57,13 +63,11 @@ const CodeSnippetForm = ({
           message: messages.join(", ")
         });
       }
-    } else {
-      // skip 429 errors, they are handled in queryClient
-      if (err instanceof AxiosError && err?.response?.status === 429) {
-        return;
-      }
-      toast.error("Something went wrong, please try again");
+      return;
     }
+
+    toast.error("Something went wrong, please try again");
+    console.error(err);
   };
 
   const onSubmit = async (data: FormModel) => {
