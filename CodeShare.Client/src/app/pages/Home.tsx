@@ -1,6 +1,6 @@
 import { useSpring, animated } from "react-spring";
-import CodeSnippetForm from "../components/codeSnippet/create/CodeSnippetForm/CodeSnippetForm";
-import CodeSnippet from "../components/codeSnippet/detail/CodeSnippet";
+import CodeSnippetForm from "../features/codesnippet/create/CodeSnippetForm/CodeSnippetForm";
+import CodeSnippet from "../features/codesnippet/detail/CodeSnippet";
 import { useCreateCodeSnippetMutation } from "../hooks/mutations/useCreateCodeSnippetMutation";
 import { useCreatePreviewSnippetMutation } from "../hooks/mutations/useCreatePreviewSnippetMutation";
 

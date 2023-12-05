@@ -1,5 +1,5 @@
 import { animated, useSpring } from "react-spring";
-import CopyButton from "../../common/CopyButton/CopyButton";
+import CopyButton from "../../../components/CopyButton/CopyButton";
 import { Code as CodeIcon, Link2 as LinkIcon } from "react-feather";
 
 interface Props {
