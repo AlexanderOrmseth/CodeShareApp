@@ -6,15 +6,15 @@ import {
   ValidationErrors,
   ValidationErrorsSchema
 } from "./codeSnippetValidator";
-import FormTextField from "../../../common/FormTextField/FormTextField";
+import FormTextField from "../../../../components/FormTextField/FormTextField";
 import { Code, Info, Share } from "react-feather";
-import LoadingButton from "../../../common/LoadingButton/LoadingButton";
+import LoadingButton from "../../../../components/LoadingButton/LoadingButton";
 import {
   CodeSnippetPreview,
   CodeSnippetBase
 } from "../../../../models/codeSnippet";
 import { UseMutateAsyncFunction } from "@tanstack/react-query";
-import FormTextArea from "../../../common/FormTextAreaField/FormTextArea";
+import FormTextArea from "../../../../components/FormTextAreaField/FormTextArea";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 
